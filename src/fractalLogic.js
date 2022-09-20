@@ -1,17 +1,25 @@
-import React, { useRef, PureComponent, useEffect } from 'react'
+import React, { useState, useRef, PureComponent, useEffect } from 'react'
 
-const Canvas = props => {
-    const canvasRef = useRef(null);
+export class Forest extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            canvasCtx: props.canvasCtx
+        };
+    }
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext("2d");
-        
+    renderTree() {
+        return <Tree />;
+    }
+
+    render() {
+        const ctx = this.state.canvasCtx;
+
         // Define line
         ctx.lineWidth = 5;
         ctx.strokeStyle = "whitesmoke";
         ctx.moveTo(0, 0);
-        ctx.lineTo(200, 100);
+        ctx.lineTo(200, 200);
 
         // Draw outer glow
         ctx.shadowBlur = 20;
@@ -22,23 +30,24 @@ const Canvas = props => {
         ctx.shadowBlur = 5;
         ctx.shadowColor = "rgba(245, 245, 245, 0.9)";
         ctx.stroke();
-    }, []);
 
-    return <canvas ref={canvasRef} {...props}/>
-}
-
-export class Forest extends PureComponent {
-    renderTree() {
-        return <Tree />;
-    }
-
-    render() {
+        return;
         // return this.renderTree();
-        return <Canvas width="500px" height="250px"/>
+        // return <Canvas width="500px" height="250px"/>
     }
 }
 
 export class Tree extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            x: 50,
+            y: 25,
+            width: 10,
+            height: 50
+        };
+    }
+
     render() {
         return (
             <div></div>
