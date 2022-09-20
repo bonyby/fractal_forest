@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import Color from "https://colorjs.io/dist/color.js";
 
 export class Forest extends PureComponent {
     constructor(props) {
@@ -37,11 +38,11 @@ export class Tree extends PureComponent {
             <Branch
                 x={this.state.x}
                 y={this.state.y}
-                width={5}
+                width={6}
                 length={120}
                 angle={0}
                 level={1}
-                maxLevel={10}
+                maxLevel={12}
                 canvasCtx={this.state.canvasCtx}
             />
         );
@@ -82,19 +83,23 @@ export class Branch extends PureComponent {
 
         // Define line
         ctx.lineWidth = w;
-        ctx.strokeStyle = "whitesmoke";
+        const startCol = new Color("sRGB", [1, 1, 1]);
+        const endCol = new Color("sRGB", [1, 0, 0]);
+        const color = startCol.range(endCol, { space: "sRGB" })(this.state.level / this.state.maxLevel);
+        ctx.strokeStyle = color.toString();
         ctx.lineCap = 'round';
         ctx.moveTo(x, y);
         ctx.lineTo(endX, endY);
+        ctx.shadowBlur = 0;
 
         // Draw outer glow
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = "rgba(245, 245, 245, 0.692)";
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.6)";
         ctx.stroke();
 
         // Draw center glow
-        ctx.shadowBlur = 5;
-        ctx.shadowColor = "rgba(245, 245, 245, 0.9)";
+        ctx.shadowBlur = 2;
+        ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.8)";
         ctx.stroke();
 
         const angle = this.state.angle;
@@ -105,7 +110,7 @@ export class Branch extends PureComponent {
                     y={endY}
                     width={Math.max(w - 1, 1)}
                     length={Math.max(l * (8 / 10), 10)}
-                    angle={angle - 30}
+                    angle={angle - 45}
                     level={this.state.level + 1}
                     maxLevel={this.state.maxLevel}
                     canvasCtx={ctx}
@@ -115,7 +120,7 @@ export class Branch extends PureComponent {
                     y={endY}
                     width={Math.max(w - 1, 1)}
                     length={Math.max(l * (8 / 10), 10)}
-                    angle={angle + 30}
+                    angle={angle + 15}
                     level={this.state.level + 1}
                     maxLevel={this.state.maxLevel}
                     canvasCtx={ctx}
