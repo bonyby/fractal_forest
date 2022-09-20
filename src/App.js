@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import './App.css';
-import { Forest, Tree } from './fractalLogic.js';
+import { Forest } from './fractalLogic.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,36 +19,14 @@ class App extends React.Component {
   }
 
   render() {
-    const forest = this.state.canvasCtx ? <Forest canvasCtx={this.state.canvasCtx} /> : '';
+    const forest = this.state.canvasCtx != null ? <Forest canvas={this.canvasRef.current} canvasCtx={this.state.canvasCtx} /> : '';
     return (
       <div id="forest_container">
-        <canvas ref={this.canvasRef} width="500px" height="250px" />
+        <canvas ref={this.canvasRef} width="750px" height="750px" />
         {forest}
       </div>
     );
   }
 }
-
-// function App() {
-//   const canvasRef = useRef(null);
-//   const canvasCtxRef = useRef(null);
-//   const forestRef = useRef(null);
-
-//   useEffect(() => {
-//     const canvas = canvasRef.current;
-//     const ctx = canvas.getContext("2d");
-
-//     canvasCtxRef.current = ctx;
-//     console.log("forestRef: " + forestRef.current);
-//     forestRef.current.setCanvasContext(canvasCtxRef);
-//   }, []);
-
-//   return (
-//     <div id="forest_container">
-//       <canvas ref={canvasRef} width="500px" height="250px" />
-//       {forestRef.current = <Forest />}
-//     </div>
-//   );
-// }
 
 export default App;
