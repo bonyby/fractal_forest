@@ -22,7 +22,7 @@ class App extends React.Component {
     const forest = this.state.canvasCtx != null ? <Forest canvas={this.canvasRef.current} canvasCtx={this.state.canvasCtx} /> : '';
     return (
       <div id="forest_container">
-        <canvas ref={this.canvasRef} width="750px" height="750px" />
+        <canvas ref={this.canvasRef} width="1000px" height="750px" />
         {forest}
       </div>
     );

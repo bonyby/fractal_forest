@@ -39,9 +39,14 @@ export class Tree extends PureComponent {
                 x={this.state.x}
                 y={this.state.y}
                 width={6}
-                length={120}
+                maxWidth={1}
+                length={250}
+                lengthScalar={0.65}
+                maxLength={5}
                 angle={0}
-                level={1}
+                rotation={45}
+                angleOffset={20}
+                level={0}
                 maxLevel={12}
                 canvasCtx={this.state.canvasCtx}
             />
@@ -56,12 +61,31 @@ export class Branch extends PureComponent {
             x: props.x,
             y: props.y,
             width: props.width,
+            maxWidth: props.maxWidth,
             length: props.length,
+            lengthScalar: props.lengthScalar,
+            maxLength: props.maxLength,
             angle: props.angle,
-            level: props.level,
+            rotation: props.rotation,
+            angleOffset: props.angleOffset,
+            level: props.level + 1,
             maxLevel: props.maxLevel,
             canvasCtx: props.canvasCtx
         };
+    }
+
+    renderBranch(xPos, yPos, ang) {
+        const {x, y, width, length, angle, ...remaining} = this.state; // split out the state so props needed to simply be passed on can be passed on with "...remaining"
+        return (
+            <Branch
+                x={xPos}
+                y={yPos}
+                width={Math.max(width - 1, this.state.maxWidth)}
+                length={Math.max(length * this.state.lengthScalar, this.state.maxLength)}
+                angle={ang}
+                {...remaining}
+            />
+        );
     }
 
     render() {
@@ -83,7 +107,7 @@ export class Branch extends PureComponent {
 
         // Define line
         ctx.lineWidth = w;
-        const startCol = new Color("sRGB", [1, 1, 1]);
+        const startCol = new Color("sRGB", [0.8, 0.8, 0.8]);
         const endCol = new Color("sRGB", [1, 0, 0]);
         const color = startCol.range(endCol, { space: "sRGB" })(this.state.level / this.state.maxLevel);
         ctx.strokeStyle = color.toString();
@@ -93,40 +117,21 @@ export class Branch extends PureComponent {
         ctx.shadowBlur = 0;
 
         // Draw outer glow
-        ctx.shadowBlur = 25;
+        ctx.shadowBlur = 30;
         ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.6)";
         ctx.stroke();
 
         // Draw center glow
-        ctx.shadowBlur = 2;
+        ctx.shadowBlur = 0;
         ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.8)";
         ctx.stroke();
 
         const angle = this.state.angle;
         return (this.state.level < this.state.maxLevel) ? (
             <div>
-                <Branch
-                    x={endX}
-                    y={endY}
-                    width={Math.max(w - 1, 1)}
-                    length={Math.max(l * (8 / 10), 10)}
-                    angle={angle - 45}
-                    level={this.state.level + 1}
-                    maxLevel={this.state.maxLevel}
-                    canvasCtx={ctx}
-                />
-                <Branch
-                    x={endX}
-                    y={endY}
-                    width={Math.max(w - 1, 1)}
-                    length={Math.max(l * (8 / 10), 10)}
-                    angle={angle + 15}
-                    level={this.state.level + 1}
-                    maxLevel={this.state.maxLevel}
-                    canvasCtx={ctx}
-                />
+                {this.renderBranch(endX, endY, angle + this.state.angleOffset + this.state.rotation)}
+                {this.renderBranch(endX, endY, angle + this.state.angleOffset - this.state.rotation)}
             </div>
-
         ) : '';
     }
 }
