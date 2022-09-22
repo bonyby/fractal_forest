@@ -48,7 +48,7 @@ export class Tree extends PureComponent {
                 rotation={45}
                 angleOffset={20}
                 level={0}
-                maxLevel={15}
+                maxLevel={12}
                 canvasCtx={this.state.canvasCtx}
             />
         );
@@ -108,7 +108,7 @@ export class Branch extends PureComponent {
 
         // Define line
         ctx.lineWidth = w;
-        const startCol = new Color("sRGB", [0.8, 0.8, 0.8]);
+        const startCol = new Color("sRGB", [0.9, 0.9, 0.9]);
         const endCol = new Color("sRGB", [1, 0, 0]);
         const color = startCol.range(endCol, { space: "sRGB" })(this.state.level / this.state.maxLevel);
         ctx.strokeStyle = color.toString();
@@ -118,12 +118,12 @@ export class Branch extends PureComponent {
         ctx.shadowBlur = 0;
 
         // Draw outer glow
-        ctx.shadowBlur = 30;
+        ctx.shadowBlur = 20;
         ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.6)";
         ctx.stroke();
 
         // Draw center glow
-        ctx.shadowBlur = 0;
+        ctx.shadowBlur = 5;
         ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.8)";
         ctx.stroke();
 
