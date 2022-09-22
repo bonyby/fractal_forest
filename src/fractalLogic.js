@@ -1,5 +1,8 @@
+import color from 'colorjs.io';
 import React, { PureComponent } from 'react'
-import Color from "https://colorjs.io/dist/color.js";
+// import Color from "https://colorjs.io/dist/color.js";
+import Color from 'colorjs.io';
+
 
 export class Forest extends PureComponent {
     constructor(props) {
