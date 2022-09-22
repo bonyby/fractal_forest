@@ -42,12 +42,12 @@ export class Tree extends PureComponent {
                 maxWidth={1}
                 length={250}
                 lengthScalar={0.65}
-                maxLength={5}
+                maxLength={2}
                 angle={0}
                 rotation={45}
                 angleOffset={20}
                 level={0}
-                maxLevel={12}
+                maxLevel={15}
                 canvasCtx={this.state.canvasCtx}
             />
         );
