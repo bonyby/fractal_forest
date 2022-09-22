@@ -42,13 +42,13 @@ export class Tree extends PureComponent {
                 width={6}
                 maxWidth={1}
                 length={250}
-                lengthScalar={0.65}
+                lengthScalar={0.67}
                 maxLength={2}
                 angle={0}
                 rotation={45}
-                angleOffset={20}
+                angleOffset={21}
                 level={0}
-                maxLevel={12}
+                maxLevel={14}
                 canvasCtx={this.state.canvasCtx}
             />
         );
@@ -118,13 +118,13 @@ export class Branch extends PureComponent {
         ctx.shadowBlur = 0;
 
         // Draw outer glow
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.6)";
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 1)";
         ctx.stroke();
 
         // Draw center glow
-        ctx.shadowBlur = 5;
-        ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 0.8)";
+        ctx.shadowBlur = 0;
+        ctx.shadowColor = "rgba(" + Math.round(color.srgb.r * 255) + "," + Math.round(color.srgb.g * 255) + "," + Math.round(color.srgb.b * 255) + ", 1)";
         ctx.stroke();
 
         const angle = this.state.angle;
