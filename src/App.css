@@ -1,14 +1,55 @@
 html {
   background-color: black;
+  color: whitesmoke;
 }
 
-#forest_container {
-  width: 80%;
-  margin: 50px;
+h1,
+p {
+  margin: 0px;
+  text-shadow:
+    0px 0px 20px rgb(245, 245, 245),
+    0px 0px 4px rgb(245, 245, 245);
+}
+
+#top_container {
+  width: 100%;
+}
+
+#settings_container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  box-sizing: border-box;
+  padding: 25px;
+  text-align: center;
+}
+
+#settings {
+  width: 100%;
+  margin: auto;
+  margin-top: 15px;
+  border-radius: 8px;
+  padding: 10px 0px 10px 0px;
+}
+
+.settings_element {
+  text-align: left;
+  padding: 5px 10px 5px 15px;
+}
+
+canvas {
+  /* box-shadow:
+    inset 0px -50px 25px -25px rgba(185, 255, 209, 0.3),
+    0px 0px 5px 10px rgba(185, 255, 209, 0.3); */
+  box-shadow:
+    inset 0px -50px 25px -25px rgba(245, 245, 245, 0.3),
+    0px 0px 5px 10px rgba(245, 245, 245, 0.3);
 }
 
 .glow {
   box-shadow:
+    inset 0px 0px 5px 0px rgb(245, 245, 245),
     0px 0px 10px 0px rgb(245, 245, 245),
-    0px 0px 30px 0px rgba(245, 245, 245, 0.692);
+    0px 0px 20px 0px rgba(245, 245, 245, 0.692);
 }

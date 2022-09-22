@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Forest } from './fractalLogic.js';
+import Settings from './settings.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,10 +21,13 @@ class App extends React.Component {
 
   render() {
     const forest = this.state.canvasCtx != null ? <Forest canvas={this.canvasRef.current} canvasCtx={this.state.canvasCtx} /> : '';
+    const w = window.innerWidth;
+    const h = window.innerHeight-5;
     return (
-      <div id="forest_container">
-        <canvas ref={this.canvasRef} width="1000px" height="750px" />
+      <div id="top_container">
+        <canvas ref={this.canvasRef} width={w} height={h} />
         {forest}
+        <Settings />
       </div>
     );
   }

@@ -20,7 +20,7 @@ export class Forest extends PureComponent {
         const canvas = this.state.canvas;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        return this.renderTree(canvas.width / 2, canvas.height - 25, ctx);
+        return this.renderTree(canvas.width / 2, canvas.height-20, ctx);
     }
 }
 
@@ -42,13 +42,13 @@ export class Tree extends PureComponent {
                 width={6}
                 maxWidth={1}
                 length={250}
-                lengthScalar={0.67}
+                lengthScalar={0.65}
                 maxLength={2}
                 angle={0}
-                rotation={45}
-                angleOffset={21}
+                rotation={60}
+                angleOffset={0}
                 level={0}
-                maxLevel={14}
+                maxLevel={13}
                 canvasCtx={this.state.canvasCtx}
             />
         );
