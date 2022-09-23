@@ -7,7 +7,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      canvasCtx: null
+      canvasCtx: null,
+      width: 6,
+      maxWidth: 1,
+      length: 250,
+      lengthScalar: 0.65,
+      maxLength: 2,
+      angle: 0,
+      rotation: 60,
+      angleOffset: 0,
+      level: 1,
+      maxLevel: 10
     };
 
     this.canvasRef = React.createRef();
@@ -19,15 +29,20 @@ class App extends React.Component {
     });
   }
 
+  rerender(settings) {
+    this.setState(settings);
+  }
+
   render() {
-    const forest = this.state.canvasCtx != null ? <Forest canvas={this.canvasRef.current} canvasCtx={this.state.canvasCtx} /> : '';
+    const { canvasCtx, ...forestProperties } = this.state;
+    const forest = this.state.canvasCtx != null ? <Forest canvas={this.canvasRef.current} {...this.state} /> : '';
     const w = window.innerWidth;
-    const h = window.innerHeight-5;
+    const h = window.innerHeight - 5;
     return (
       <div id="top_container">
         <canvas ref={this.canvasRef} width={w} height={h} />
         {forest}
-        <Settings />
+        <Settings runHandler={(settings) => this.rerender(settings)} {...forestProperties} />
       </div>
     );
   }
