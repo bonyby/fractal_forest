@@ -24,9 +24,14 @@ export class Settings extends Component {
     render() {
         const settingsElements = (this.state.open) ? (
             <div id="settings" className="glow">
-                {<SettingsElement name="maxLevel" value={this.state.maxLevel} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
-                {<SettingsElement name="rotation" value={this.state.rotation} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="width" value={this.state.width} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="minWidth" value={this.state.minWidth} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
                 {<SettingsElement name="length" value={this.state.length} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="lengthScalar" value={this.state.lengthScalar} inputChangeHandler={(n, v) => this.inputChange(n, v)} step={".01"} numbType={"decimal-number"}/>}
+                {<SettingsElement name="minLength" value={this.state.minLength} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="rotation" value={this.state.rotation} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="angleOffset" value={this.state.angleOffset} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="maxLevel" value={this.state.maxLevel} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
                 <button onClick={() => this.runHandler(this.props.runHandler)}><p>Run</p></button>
             </div>
         ) : '';
@@ -49,7 +54,7 @@ class SettingsElement extends Component {
     }
 
     inputHandler(e, f) {
-        f(this.props.name, parseInt(e.target.value));
+        f(this.props.name, parseFloat(e.target.value));
     }
 
     render() {
@@ -57,6 +62,8 @@ class SettingsElement extends Component {
             onChange={(e) => this.inputHandler(e, this.props.inputChangeHandler)}
             style={{ width: "40px" }}
             type="number"
+            step={this.props.step}
+            is={this.props.numbType}
             id={this.props.name}
             name={this.props.name}
             value={this.props.value}

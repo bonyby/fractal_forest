@@ -9,10 +9,10 @@ class App extends React.Component {
     this.state = {
       canvasCtx: null,
       width: 6,
-      maxWidth: 1,
+      minWidth: 1,
       length: 250,
       lengthScalar: 0.65,
-      maxLength: 2,
+      minLength: 2,
       angle: 0,
       rotation: 60,
       angleOffset: 0,

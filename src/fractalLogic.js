@@ -12,6 +12,7 @@ export class Forest extends PureComponent {
     }
 
     renderTree(x, y) {
+        console.log("width: " + this.props.width);
         return <Tree x={x} y={y} {...this.props} />;
     }
 
@@ -36,8 +37,8 @@ export class Branch extends PureComponent {
             <Branch
                 x={xPos}
                 y={yPos}
-                width={Math.max(width - 1, this.props.maxWidth)}
-                length={Math.max(length * this.props.lengthScalar, this.props.maxLength)}
+                width={Math.max(width - 1, this.props.minWidth)}
+                length={Math.max(length * this.props.lengthScalar, this.props.minLength)}
                 level={level + 1}
                 angle={ang}
                 {...remaining}
@@ -53,6 +54,8 @@ export class Branch extends PureComponent {
         const angle = this.props.angle;
         const theta = angle / 180 * Math.PI;
         const ctx = this.props.canvasCtx;
+
+        // console.log("Width: " + w);
 
         // Calculate the end point. Rotate up-vector (v=(0,-1)) by specified angle - up-vector is negative because y-axis is flipped on canvas
         const dirX = Math.sin(theta);

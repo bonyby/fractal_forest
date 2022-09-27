@@ -38,6 +38,14 @@ p {
   padding: 5px 10px 5px 15px;
 }
 
+.settings_element > *{
+  display: inline-block;
+}
+
+.settings_element > input {
+  float: right;
+}
+
 canvas {
   /* box-shadow:
     inset 0px -50px 25px -25px rgba(185, 255, 209, 0.3),
