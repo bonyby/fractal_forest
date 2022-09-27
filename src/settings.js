@@ -8,6 +8,12 @@ export class Settings extends Component {
             open: true,
             ...properties
         };
+
+        window.addEventListener("keydown", (event) => {
+            if(event.key === "Enter") {
+                this.runHandler(this.props.runHandler);
+            }
+        });
     }
 
     inputChange(name, value) {
