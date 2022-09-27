@@ -25,6 +25,8 @@ export class Settings extends Component {
         const settingsElements = (this.state.open) ? (
             <div id="settings" className="glow">
                 {<SettingsElement name="maxLevel" value={this.state.maxLevel} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="rotation" value={this.state.rotation} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
+                {<SettingsElement name="length" value={this.state.length} inputChangeHandler={(n, v) => this.inputChange(n, v)} />}
                 <button onClick={() => this.runHandler(this.props.runHandler)}><p>Run</p></button>
             </div>
         ) : '';
@@ -47,7 +49,7 @@ class SettingsElement extends Component {
     }
 
     inputHandler(e, f) {
-        f(this.props.name, e.target.value);
+        f(this.props.name, parseInt(e.target.value));
     }
 
     render() {
